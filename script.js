@@ -1,31 +1,30 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const historyBtn = document.getElementById("history-btn");
-    const durationBtn = document.getElementById("duration-btn");
+historyBtn= document.getElementById("history-btn")
+durationBtn = document.getElementById("duration-btn")
 
-    // Button clicks
-    if (historyBtn) {
-        historyBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            window.location.href = "history.html";
-        });
-    }
+historyBtn.addEventListener("click", function () {
+    document.getElementById("all-section").style.display = "none";
+    document.getElementById("history-section").style.display = "block";
 
-    if (durationBtn) {
-        durationBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            window.location.href = "index.html";
-        });
-    }
+    historyBtn.classList.add("bg-[#B4F461]");
+    durationBtn.classList.remove("bg-[#B4F461]");
 
-    // Page load অনুযায়ী active button set
-    if (window.location.href.includes("index.html") || window.location.pathname === "/") {
-        if (durationBtn) durationBtn.classList.add("bg-[#B4F461]");
-        if (historyBtn) historyBtn.classList.remove("bg-[#B4F461]");
-    } else if (window.location.href.includes("history.html")) {
-        if (historyBtn) historyBtn.classList.add("bg-[#B4F461]");
-        if (durationBtn) durationBtn.classList.remove("bg-[#B4F461]");
-    }
+    
+
+
 });
+
+durationBtn.addEventListener("click", function () {
+    document.getElementById("history-section").style.display = "none";
+    document.getElementById("all-section").style.display = "block";
+
+    durationBtn.classList.add("bg-[#B4F461]");
+    historyBtn.classList.remove("bg-[#B4F461]");
+});
+
+
+
+
+
 
 function handleDonate(inputId, totalId) {
     const inputElement = document.getElementById(inputId);
@@ -61,6 +60,21 @@ function handleDonate(inputId, totalId) {
     const balance = input + totalTk;
     totalElement.innerText = balance;
 
+    const card = totalElement.closest(".card"); 
+    const title = card.querySelector("h1").innerText;
+
+    const historySection= document.getElementById("history-section")
+
+    const newHistory = document.createElement("div")
+
+    newHistory.innerHTML=`
+         <div class=" p-8 shadow-md rounded-2xl">
+                <h1 class="text-xl font-bold mb-4">${balance} Taka ${title}</h1>
+                <p>${new Date().toString()} (Bangladesh Standard Time)</p>
+            </div>
+    
+    `
+    historySection.appendChild(newHistory)
 
     inputElement.value = "";
 
