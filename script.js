@@ -70,7 +70,7 @@ function handleDonate(inputId, totalId) {
     newHistory.innerHTML=`
          <div class=" p-8 shadow-md rounded-2xl">
                 <h1 class="text-xl font-bold mb-4">${balance} Taka ${title}</h1>
-                <p>${new Date().toString()} (Bangladesh Standard Time)</p>
+                <p>${new Date().toString()}</p>
             </div>
     
     `
